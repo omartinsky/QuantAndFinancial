@@ -2,7 +2,7 @@
 # www.quantandfinancial.com
 
 from math import pow, floor, ceil, log
-from quant.optimization import newton
+from optimization import newton
 
 
 class TVM:
