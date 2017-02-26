@@ -12,6 +12,9 @@ ADDouble::ADDouble(ADEngine& engine, double value)
     , _value(value)
 {
     _id = engine._id_counter++;
+#ifdef AD_ENABLE_LOGGING
+    cout << "Creating new variable AD" << _id << " = " << value << endl;
+#endif
     engine._variables.insert(make_pair(_id, *this));
 }
 
@@ -21,7 +24,8 @@ ADDouble::ADDouble(ADEngine& engine, double value)
 void ADEngine::add_direct_derivative(const ADDouble& of, const ADDouble& wrt, double value)
 {
 #ifdef AD_ENABLE_LOGGING
-    cout << "    dVAR" << of._id << "/dVAR" << wrt._id << " += " << value << endl;
+    cout << "    " << logging::getVariableName(of) << "/d" 
+        << logging::getVariableName(wrt) << " += " << value << endl;
 #endif
     _derivatives[of._id][wrt._id] += value;
 }

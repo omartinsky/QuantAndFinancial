@@ -1,4 +1,4 @@
-// Copyright © 2017 Ondrej Martinsky, All rights reserved
+// Copyright © 2016 Ondrej Martinsky, All rights reserved
 // www.quantandfinancial.com
 
 #pragma once
@@ -48,38 +48,44 @@ private:
     friend class ADDouble;
 };
 
-inline string getVariableName(const ADDouble& var)
+namespace logging
 {
-    return "VAR" + std::to_string(var._id);
-}
-inline string getVariableName(const double&)
-{
-    return "CONST";
-}
-inline double getValue(const ADDouble& var)
-{
-    return var.get_value();
-}
-inline double getValue(const double& var)
-{
-    return var;
-}
+    inline string getVariableName(const ADDouble& var)
+    {
+        return "AD" + std::to_string(var._id);
+    }
 
-template <typename TL, typename TR>
-void logBinaryOperation(string op, const ADDouble& result, const TL& l, const TR& r)
-{
-    cout << "Performing operation "
-        << getVariableName(result) << " := "
-        << getVariableName(l) << " " << op << " "
-        << getVariableName(r) << " "
-        << "(" << getValue(l) << " + " << getValue(r) << ")" << endl;
-}
+    inline string getVariableName(const double&)
+    {
+        return "CONST";
+    }
 
-inline void logUnaryOperation(string op, const ADDouble& result, const ADDouble& x)
-{
-    cout << "Performing operation "
-        << getVariableName(result) << " := " << op + "(" << getVariableName(x) << ") "
-        << op << "(" << getValue(x) << ")" << endl;
+    inline double getValue(const ADDouble& var)
+    {
+        return var.get_value();
+    }
+
+    inline double getValue(const double& var)
+    {
+        return var;
+    }
+
+    template <typename TL, typename TR>
+    void logBinaryOperation(string op, const ADDouble& result, const TL& l, const TR& r)
+    {
+        cout << "Performing operation "
+            << getVariableName(result) << " := "
+            << getVariableName(l) << " " << op << " "
+            << getVariableName(r) << " = "
+            << getValue(l) << " " << op << " " << getValue(r)  << endl;
+    }
+
+    inline void logUnaryOperation(string op, const ADDouble& result, const ADDouble& x)
+    {
+        cout << "Performing operation "
+            << getVariableName(result) << " := " << op + "(" << getVariableName(x) << ") = "
+            << op << "(" << getValue(x) << ")" << endl;
+    }
 }
 
 inline ADDouble operator+(const ADDouble& l, const ADDouble& r)
@@ -87,7 +93,7 @@ inline ADDouble operator+(const ADDouble& l, const ADDouble& r)
     ADEngine& e = l._engine;
     ADDouble out(e, l._value + r._value);
 #ifdef AD_ENABLE_LOGGING
-    logBinaryOperation("+", out, l, r);
+    logging::logBinaryOperation("+", out, l, r);
 #endif
     e.add_direct_derivative(out, l, 1.);
     e.add_direct_derivative(out, r, 1.);
@@ -99,7 +105,7 @@ inline ADDouble operator-(const ADDouble& l, const ADDouble& r)
     ADEngine& e = l._engine;
     ADDouble out(e, l._value - r._value);
 #ifdef AD_ENABLE_LOGGING
-    logBinaryOperation("-", out, l, r);
+    logging::logBinaryOperation("-", out, l, r);
 #endif
     e.add_direct_derivative(out, l, 1.);
     e.add_direct_derivative(out, r, -1.);
@@ -110,7 +116,7 @@ inline ADDouble operator*(const ADDouble& l, const ADDouble& r)
 {
     ADDouble out(l._engine, l._value * r._value);
 #ifdef AD_ENABLE_LOGGING
-    logBinaryOperation("*", out, l, r);
+    logging::logBinaryOperation("*", out, l, r);
 #endif
     ADEngine& e = out._engine;
     e.add_direct_derivative(out, l, r._value);
@@ -122,7 +128,7 @@ inline ADDouble operator*(double l, const ADDouble& r)
 {
     ADDouble out(r._engine, l * r._value);
 #ifdef AD_ENABLE_LOGGING
-    logBinaryOperation("*", out, l, r);
+    logging::logBinaryOperation("*", out, l, r);
 #endif
     ADEngine& e = out._engine;
     e.add_direct_derivative(out, r, l);
@@ -133,7 +139,7 @@ inline ADDouble operator/(const ADDouble& l, const ADDouble& r)
 {
     ADDouble out(l._engine, l._value * r._value);
 #ifdef AD_ENABLE_LOGGING
-    logBinaryOperation("/", out, l, r);
+    logging::logBinaryOperation("/", out, l, r);
 #endif
     ADEngine& e = out._engine;
     e.add_direct_derivative(out, l, 1.0 / r._value);
@@ -146,7 +152,7 @@ inline ADDouble exp(const ADDouble& x)
     double ex = exp(x._value);
     ADDouble out(x._engine, ex);
 #ifdef AD_ENABLE_LOGGING
-    logUnaryOperation("exp", out, x);
+    logging::logUnaryOperation("exp", out, x);
 #endif
     ADEngine& e = out._engine;
     e.add_direct_derivative(out, x, ex);
@@ -157,7 +163,7 @@ inline ADDouble log(const ADDouble& x)
 {
     ADDouble out(x._engine, log(x._value));
 #ifdef AD_ENABLE_LOGGING
-    logUnaryOperation("log", out, x);
+    logging::logUnaryOperation("log", out, x);
 #endif
     ADEngine& e = out._engine;
     e.add_direct_derivative(out, x, 1/x._value);
