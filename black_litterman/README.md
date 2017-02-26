@@ -1,6 +1,3 @@
-www.quantandfinancial.com
+### Portfolio Optimization II : Black-Litterman model
 
-## Quantitative & Financial
-#### Blog about Mathematics, Quantitative Analytics and Financial Modelling
-
-This repository contains supporting examples which are referenced from posts published on www.quantandfinancial.com
+Please refer to the corresponding article http://www.quantandfinancial.com/2013/08/portfolio-optimization-ii-black.html
