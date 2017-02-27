@@ -73,7 +73,7 @@ namespace logging
     template <typename TL, typename TR>
     void logBinaryOperation(string op, const ADDouble& result, const TL& l, const TR& r)
     {
-        cout << "Performing operation "
+        cout << "Operation "
             << getVariableName(result) << " := "
             << getVariableName(l) << " " << op << " "
             << getVariableName(r) << " = "
@@ -82,7 +82,7 @@ namespace logging
 
     inline void logUnaryOperation(string op, const ADDouble& result, const ADDouble& x)
     {
-        cout << "Performing operation "
+        cout << "Operation "
             << getVariableName(result) << " := " << op + "(" << getVariableName(x) << ") = "
             << op << "(" << getValue(x) << ")" << endl;
     }

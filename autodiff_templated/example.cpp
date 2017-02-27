@@ -23,9 +23,9 @@ void example1()
     ADDouble x1(e, 3);
     ADDouble x2(e, 4);
 
-    // Perform the calculation 
+    // Do the calculation 
     ADDouble y = f(x1, x2);
-    cout << "y      = " << y.get_value() << endl;
+    cout << "y = " << y.get_value() << endl;
 
     // Apply chain rule to derivatives in calculation tree
     cout << endl;
