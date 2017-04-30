@@ -35,3 +35,8 @@ def tohtml(working_directory, input, output=None):
 	
 tohtml("binomial_option_pricing", "binomial_option_pricing.ipynb")
 tohtml("black_litterman", "black_litterman.ipynb")
+tohtml("heath_jarrow_morton","hjm.ipynb")
+tohtml("LU_decomposition","LU_decomposition.ipynb")
+tohtml("principal_component_analysis","PCA.ipynb")
+tohtml("time_value_of_money","tvm.ipynb")
+tohtml("yield_curve_bootstrapping","bootstrapping.ipynb")
