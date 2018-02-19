@@ -19,11 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="example1.h" />
-    <ClInclude Include="example2.h" />
-    <ClInclude Include="example3.h" />
-    <ClInclude Include="example4.h" />
-    <ClInclude Include="example5.h" />
+    <ClInclude Include="example1-simple.h" />
+    <ClInclude Include="example2-partialderivatives.h" />
+    <ClInclude Include="example3-callstack.h" />
+    <ClInclude Include="example4-cycles.h" />
+    <ClInclude Include="example5-vectors1.h" />
+    <ClInclude Include="example6-vectors2.h" />
     <ClInclude Include="helpers.h" />
   </ItemGroup>
   <ItemGroup>

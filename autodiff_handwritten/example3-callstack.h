@@ -5,7 +5,7 @@
 
 #include "helpers.h"
 
-/* Example 3: Call stack and parameters */
+/* Example 3: Differentiating call stack (function calling other functions) */
 
 namespace example3
 {

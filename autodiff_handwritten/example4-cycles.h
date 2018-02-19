@@ -4,9 +4,8 @@
 #pragma once
 
 #include "helpers.h"
-#include <stdio.h>
 
-/* Example 4: Cycles */
+/* Example 4: Differentiating cycles  */
 
 namespace example4
 {
@@ -14,7 +13,7 @@ namespace example4
     {
         double result = 1;
         for (int i = 0; i < n; ++i)
-            result *= x + i;
+            result *= x + i;                     // Step 1
         return result;
     }
 
@@ -28,18 +27,18 @@ namespace example4
         for (int i = 0; i < n; ++i)
         {
             results.push_back(result);
-            result *= (x + i);
+            result *= x + i;                     // Step 1
         }
 
         // Reverse sweep
         for (int i = n - 1; i >= 0; --i)
         {
             d_dx += d_dresult * results[i];
-            d_dresult = d_dresult * (x + i);
+            d_dresult = d_dresult * (x + i);     // Step 1 Reverse
         }
 
         /*
-        "Manual" Illustration for n=3
+        Illustration of manual calculation for n=3
         double r0 = 1;                           // Step 0
         double r1 = r0*(x+0) = r0*x + r0*0;      // Step 1
         double r2 = r1*(x+1) = r1*x + r1*1;      // Step 2

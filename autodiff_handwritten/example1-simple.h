@@ -5,7 +5,7 @@
 
 #include "helpers.h"
 
-/* Example 1: Basic function call */
+/* Example 1: Differentiating simple function call */
 
 namespace example1
 {

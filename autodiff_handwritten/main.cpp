@@ -2,11 +2,12 @@
 // www.quantandfinancial.com
 
 #include "helpers.h"
-#include "example1.h"
-#include "example2.h"
-#include "example3.h"
-#include "example4.h"
-#include "example5.h"
+#include "example1-simple.h"
+#include "example2-partialderivatives.h"
+#include "example3-callstack.h"
+#include "example4-cycles.h"
+#include "example5-vectors1.h"
+#include "example6-vectors2.h"
 
 void header(string s)
 {
@@ -26,5 +27,7 @@ int main()
     example4::example4();
     header("Example 5");
     example5::example5();
+    header("Example 6");
+    example6::example6();
 }
 

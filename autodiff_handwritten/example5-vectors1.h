@@ -4,9 +4,8 @@
 #pragma once
 
 #include "helpers.h"
-#include <stdio.h>
 
-/* Example 5: Vectors */
+/* Example 5: Differentiating function with vector arguments */
 
 namespace example5
 {
@@ -23,7 +22,7 @@ namespace example5
     {
         double mult = 1;
         for (int i = 0; i < x.size(); ++i)
-            mult *= (1 + x[i]);
+            mult *= (1 + x[i]);                  // Step 1
         
         // Reverse sweep
         for (int i = 0; i < x.size(); ++i)
