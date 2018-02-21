@@ -9,9 +9,9 @@
 using namespace std;
 
 template <typename T>
-T f(T x1, T x2)
+T f(T x0, T x1)
 {
-    return log(x1) + x2 * x2 * x2;
+    return log(x0) + x1 * x1 * x1;
 }
 
 void example1()
@@ -20,25 +20,25 @@ void example1()
 
     // Register independent variables. Later, we will request derivative of the result
     // with respect to these variables
-    ADDouble x1(e, 3);
-    ADDouble x2(e, 4);
+    ADDouble x0(e, 3);
+    ADDouble x1(e, 4);
 
     // Do the calculation 
-    ADDouble y = f(x1, x2);
+    ADDouble y = f(x0, x1);
     cout << "y = " << y.get_value() << endl;
 
     // Apply chain rule to derivatives in calculation tree
     cout << endl;
     cout << "*** Automatic differentiation" << endl;
+    cout << "dy_dx0 = " << e.get_derivative(y, x0) << endl;
     cout << "dy_dx1 = " << e.get_derivative(y, x1) << endl;
-    cout << "dy_dx2 = " << e.get_derivative(y, x2) << endl;
 
     // Finite difference method
     double d = 1e-6;
     cout << endl;
     cout << "*** Finite difference method" << endl;
-    cout << "dy_dx1 = " << (f(3. + d, 4.) - f(3. - d, 4.)) / (2 * d) << endl;
-    cout << "dy_dx2 = " << (f(3., 4. + d) - f(3., 4. - d)) / (2 * d) << endl;
+    cout << "dy_dx0 = " << (f(3. + d, 4.) - f(3. - d, 4.)) / (2 * d) << endl;
+    cout << "dy_dx1 = " << (f(3., 4. + d) - f(3., 4. - d)) / (2 * d) << endl;
 }
 
 void main()
