@@ -1,6 +1,5 @@
-### Portfolio Optimization II : Black-Litterman model
+### Black-Litterman model
 
-Please refer to the corresponding articles on 
+This directory has been permanently moved to:
 
-http://www.quantandfinancial.com/2013/07/mean-variance-portfolio-optimization.html
-http://www.quantandfinancial.com/2013/08/black-litterman.html
+https://github.com/omartinsky/BlackLitterman
